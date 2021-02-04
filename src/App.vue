@@ -1,26 +1,20 @@
 <template>
-  <router-link to="/">Home</router-link> |
-  <router-link to="/login">Login</router-link> |
-  <router-link to="/register">Register</router-link> | 
-  <router-link to="/logout">Logout</router-link>
-  <main>
-    <router-view></router-view>
-  </main>
+  <Nav/>
+  <div class="container">
+    <main class="section">
+        <router-view></router-view>
+    </main>
+  </div>
 </template>
 
 <script>
+import './styles/main.css';
+import Nav from './components/Nav';
+
 export default {
   name: 'App',
+  components: {
+    Nav
+  }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

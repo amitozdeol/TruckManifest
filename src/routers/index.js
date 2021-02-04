@@ -1,8 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Login from '../components/Login'
-import Logout from '../components/Logout'
 import Register from '../components/Register'
-import Dashboard from '../components/Dashboard'
+import Home from '../components/Home'
 import firebase from "firebase/app";
 
 const routes = [
@@ -12,20 +11,14 @@ const routes = [
         component: Login
     },
     {
-        path: '/logout',
-        name: 'Logout',
-        component: Logout,
-        meta: { requiresAuth: true }
-    },
-    {
         path: '/register',
         name: 'Register',
         component: Register 
     },
     {
         path: '/',
-        name: 'Dashboard',
-        component: Dashboard,
+        name: 'Home',
+        component: Home,
         meta: { requiresAuth: true }
     }
 ];
@@ -36,21 +29,30 @@ const router = createRouter({
 });
 
 /**
- * Prevent user from going to dahsboard page if they're not logged in
+ * Get current logged in user
+ */
+firebase.getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+        unsubscribe();
+        resolve(user);
+      }, reject);
+    }
+)}; 
+
+/**
+ * Prevent user from going to home page if they're not logged in
  * Prevent user from accessing login or register page if they're logged in
  */
-router.beforeEach((to, from, next) => {
-    const requireAuth = to.meta.requiresAuth ?? false;
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          // User is signed in.
-          if (to.name === 'Login' || to.name === 'Register') next({ name: 'Dashboard' })
-          else next()
-        } else {
-          // No user is signed in.
-          if (requireAuth) next({ name: 'Login' })
-          else next()
-        }
-    });
+router.beforeEach(async (to, from, next) => {
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    const user = await firebase.getCurrentUser();
+    if(user){
+        if (to.name === 'Login' || to.name === 'Register') next({ name: 'Home' });
+        else next();
+    }else{
+        if (requiresAuth) next('Login');
+        else next();
+    }
 })
 export default router

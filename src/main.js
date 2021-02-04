@@ -16,7 +16,7 @@ const firebaseConfig = {
     measurementId: "G-WRXFQGGH0X"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);  
+firebase.initializeApp(firebaseConfig); 
 app.config.globalProperties.$firebase = firebase;
 
 app.use(router).mount('#app');
