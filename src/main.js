@@ -16,7 +16,12 @@ const firebaseConfig = {
     measurementId: "G-WRXFQGGH0X"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig); 
+firebase.initializeApp(firebaseConfig);
+if (location.hostname === "localhost") {
+  // Point to the RTDB emulator running on localhost.
+  console.log("local");
+  firebase.database().useEmulator("localhost", 8082);
+}
 app.config.globalProperties.$firebase = firebase;
 
 app.use(router).mount('#app');

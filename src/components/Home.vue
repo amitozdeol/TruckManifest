@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import 'firebase/database';
+
 export default {
   data() {
       return {
@@ -26,18 +28,24 @@ export default {
       }
   },
   methods:{
-      login() {
+      submit() {
         const submitBtn = this.$refs.submitBtn;
         submitBtn.classList.add('is-loading');
-        this.$firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-            .then(data => {
-                submitBtn.classList.remove('is-loading');
-                console.log(data);
-                this.$router.replace({ name: "Home" });
-            })
-            .catch(err => {
-                this.error = err.message;
-            });
+
+        this.$firebase.database().ref('truck').set({
+          data: this.data1,
+          data1: this.data2,
+        }, (error) => {
+          if (error) {
+            // The write failed...
+            console.log(error);
+          } else {
+            // Data saved successfully!
+            console.log("data saved");
+            submitBtn.classList.remove('is-loading');
+          }
+        });
+
       }
   }
 }

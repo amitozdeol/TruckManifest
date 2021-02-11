@@ -39,6 +39,12 @@
                 user: null
             }
         },
+        watch:{
+            async $route (to, from){
+                console.log(to.name, from.name);
+                this.user = await this.getCurrentUser();
+            }
+        },
         async mounted(){
             this.user = await this.getCurrentUser();
         },
