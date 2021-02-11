@@ -1,2 +1,11 @@
 21:44:30.674 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
 21:44:30.918 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:8082
+22:19:44.643 [Thread-1] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
+22:19:44.678 [NamespaceSystem-akka.actor.default-dispatcher-24] INFO com.firebase.core.namespace.Terminator$Terminator - 3 actors left to terminate: truckmanifest-ba0a5-default-rtdb, fake-server, truckmanifest-ba0a5
+22:19:44.710 [NamespaceSystem-akka.actor.default-dispatcher-26] INFO com.firebase.core.namespace.NamespaceActor - Stopping namespace actor for truckmanifest-ba0a5
+22:19:44.713 [NamespaceSystem-akka.actor.default-dispatcher-21] INFO com.firebase.core.namespace.NamespaceActor - Stopping namespace actor for fake-server
+22:19:44.715 [NamespaceSystem-akka.actor.default-dispatcher-22] INFO com.firebase.core.namespace.NamespaceActor - Stopping namespace actor for truckmanifest-ba0a5-default-rtdb
+22:19:44.723 [NamespaceSystem-akka.actor.default-dispatcher-26] INFO com.firebase.core.namespace.NamespaceActor - Gauges removed for truckmanifest-ba0a5
+22:19:44.724 [NamespaceSystem-akka.actor.default-dispatcher-21] INFO com.firebase.core.namespace.NamespaceActor - Gauges removed for fake-server
+22:19:44.725 [NamespaceSystem-akka.actor.default-dispatcher-22] INFO com.firebase.core.namespace.NamespaceActor - Gauges removed for truckmanifest-ba0a5-default-rtdb
+22:19:44.746 [Thread-1] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
