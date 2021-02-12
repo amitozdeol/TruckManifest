@@ -1,31 +1,33 @@
 <template>
-    <nav class="navbar container" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <img src="favicon/favicon-32x32.png" >  &nbsp; Truck Manifest
-            </a>
+    <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <img src="favicon/favicon-32x32.png" >  &nbsp; Truck Manifest
+                </a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <router-link to="/" class="navbar-item" :class="user ? 'is-active': ''">Home</router-link>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                    data-target="navbarBasicExample" @click="toggleNav = !toggleNav">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
 
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div v-if="user" class="buttons">
-                        <button class="button is-light" @click="logout">Logout</button>
-                    </div>
-                    <div v-else class="buttons">
-                        <router-link to="/register" class="button is-primary">Register</router-link>
-                        <router-link to="/login" class="button is-light">Login</router-link>
+            <div id="navbarBasicExample" class="navbar-menu " :class="{'is-active': toggleNav}">
+                <div class="navbar-start">
+                    <router-link to="/" class="navbar-item" :class="user ? 'is-active': ''">Home</router-link>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div v-if="user" class="buttons">
+                            <button class="button is-light" @click="logout">Logout</button>
+                        </div>
+                        <div v-else class="buttons">
+                            <router-link to="/register" class="button is-primary">Register</router-link>
+                            <router-link to="/login" class="button is-light">Login</router-link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,7 +38,8 @@
     export default {
         data(){
             return {
-                user: null
+                user: null,
+                toggleNav: false
             }
         },
         watch:{
