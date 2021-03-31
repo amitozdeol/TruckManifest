@@ -2,12 +2,11 @@
     <nav class="navbar is-light" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="/">
-                    <img src="favicon/favicon-32x32.png" >  &nbsp; Truck Manifest
+                <a href="/" class="navbar-item">
+                    <strong class="has-text-white">Truck Manifest</strong>
                 </a>
 
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                    data-target="navbarBasicExample" @click="toggleNav = !toggleNav">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="toggleNav = !toggleNav">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -16,7 +15,7 @@
 
             <div id="navbarBasicExample" class="navbar-menu " :class="{'is-active': toggleNav}">
                 <div class="navbar-start">
-                    <router-link to="/" class="navbar-item" :class="user ? 'is-active': ''">Home</router-link>
+                    <router-link to="/" class="navbar-item is-tab" :class="user ? 'is-active': ''">Home</router-link>
                 </div>
 
                 <div class="navbar-end">

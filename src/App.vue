@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import './styles/main.css';
+import './styles/main.scss';
 import Nav from './components/Nav';
 
 export default {
