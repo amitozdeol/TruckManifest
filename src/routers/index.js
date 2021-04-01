@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Login from '../components/Login'
 import Register from '../components/Register'
 import Home from '../components/Home'
+import Organization from '../components/Organization'
 import firebase from "firebase/app";
 
 const routes = [
@@ -13,12 +14,18 @@ const routes = [
     {
         path: '/register',
         name: 'Register',
-        component: Register 
+        component: Register
     },
     {
         path: '/',
         name: 'Home',
         component: Home,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/organization',
+        name: 'Organization',
+        component: Organization,
         meta: { requiresAuth: true }
     }
 ];
@@ -38,7 +45,7 @@ firebase.getCurrentUser = () => {
         resolve(user);
       }, reject);
     }
-)}; 
+)};
 
 /**
  * Prevent user from going to home page if they're not logged in

@@ -1,6 +1,6 @@
 <template>
-  <h1 class="title">Welcome {{ $firebase.auth().currentUser.displayName }}</h1>
-  <form @submit.prevent="submit" method="post">
+    <Header title='Home'/>
+    <form @submit.prevent="submit" method="post">
         <div class="columns">
             <div class="column">
                 <div class="field">
@@ -40,48 +40,52 @@
             </div>
         </div>
         <button ref="submitBtn" type="submit" class="button is-primary">Submit</button>
-  </form>
+    </form>
 </template>
 
 <script>
-import 'firebase/database';
+    import 'firebase/database';
+    import Header from './Header';
 
-export default {
-  data() {
-      return {
-          license_plate: '',
-          company: '',
-          truck_number: '',
-          truck_content: '',
-          weight: '',
-      }
-  },
-  methods:{
-      submit() {
-        const submitBtn = this.$refs.submitBtn;
-        submitBtn.classList.add('is-loading');
+    export default {
+        components: {
+            Header,
+        },
+        data() {
+            return {
+                license_plate: '',
+                company: '',
+                truck_number: '',
+                truck_content: '',
+                weight: '',
+            }
+        },
+        methods: {
+            submit() {
+                const submitBtn = this.$refs.submitBtn;
+                submitBtn.classList.add('is-loading');
 
-        this.$firebase.database().ref('truck').set({
-          license_plate: this.license_plate,
-          company: this.company,
-          truck_number: this.truck_number,
-          truck_content: this.truck_content,
-          weight: this.weight,
-          created_at: Date.now()
-        }, (error) => {
-          if (error) {
-            // The write failed...
-            console.log(error);
-          } else {
-            // Data saved successfully!
-            console.log("data saved");
-            submitBtn.classList.remove('is-loading');
-          }
-        });
+                this.$firebase.database().ref('truck').set({
+                    license_plate: this.license_plate,
+                    company: this.company,
+                    truck_number: this.truck_number,
+                    truck_content: this.truck_content,
+                    weight: this.weight,
+                    created_at: Date.now()
+                }, (error) => {
+                    if (error) {
+                        // The write failed...
+                        console.log(error);
+                    } else {
+                        // Data saved successfully!
+                        console.log("data saved");
+                        submitBtn.classList.remove('is-loading');
+                    }
+                });
 
-      }
-  }
-}
+            }
+        }
+    }
 </script>
 
 <style>
