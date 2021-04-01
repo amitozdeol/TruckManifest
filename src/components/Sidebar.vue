@@ -5,7 +5,7 @@
                 <header class="category-header">Admin</header>
                 <ul class="menu-list">
                     <li>
-                        <router-link to="/organization">Organization</router-link>
+                        <router-link :class="active=='organizations' ? 'is-active' : ''" to="/organizations" @click="active='organizations'">Organizations</router-link>
                     </li>
                 </ul>
             </div>
@@ -17,7 +17,12 @@
     import CheckLogin from './../mixin/CheckLogin';
 
     export default {
-        mixins: [CheckLogin]
+        mixins: [CheckLogin],
+        data() {
+            return {
+                active: ''
+            }
+        },
     }
 </script>
 

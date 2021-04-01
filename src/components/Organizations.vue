@@ -1,5 +1,15 @@
 <template>
-    <Header title='Organization' subtitle="Manage all the organizations from this page"/>
+    <Loader :active="is_loading" />
+    <Header title='Organizations' subtitle="Manage all the organizations from this page"/>
+    <div class="columns is-desktop">
+        <div v-for="org in orgs" :key="org.key" class="column">
+            <article class="tile is-child box">
+                <p class="title">{{org.name}}</p>
+                <p class="subtitle">{{org.detail}}</p>
+            </article>
+        </div>
+    </div>
+
     <form @submit.prevent="submit" method="post">
         <div class="columns">
             <div class="column">
@@ -24,23 +34,41 @@
 <script>
     import 'firebase/database';
     import Header from './Header';
+    import Loader from './Loader';
 
     export default {
         components: {
             Header,
+            Loader
         },
         data() {
             return {
+                is_loading: false,
+                orgs: [],
                 name: '',
                 detail: ''
             }
+        },
+        mounted(){
+            this.is_loading= true;
+            var orgs = this.$firebase.database().ref('org');
+            orgs.once('value', (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    this.orgs.push({key: childSnapshot.key, ...childSnapshot.val()});
+                });
+                this.is_loading= false;
+            });
+
+
         },
         methods: {
             submit() {
                 const submitBtn = this.$refs.submitBtn;
                 submitBtn.classList.add('is-loading');
 
-                this.$firebase.database().ref('org').set({
+                const orgs = this.$firebase.database().ref('org');
+                var neworg = orgs.push();
+                neworg.set({
                     name: this.name,
                     detail: this.detail,
                     created_at: Date.now()

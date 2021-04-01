@@ -4,6 +4,7 @@ $font-darker-color: #5b646d;
 $highlight-color: #ffa500;
 $main-color: #2e323b;
 $label-color: $font-color;
+$menu-item-active-color: #fff !important;
 
 $light-color: lighten($main-color, 3%);
 $dark-color: darken($main-color, 3%);
@@ -143,7 +144,7 @@ body {
     z-index: -2;
     left: 0;
     right: 0;
-    background-color: $lighter-color;
+    background-color: $dark-color;
 }
 
 .sidebar,

@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Login from '../components/Login'
 import Register from '../components/Register'
 import Home from '../components/Home'
-import Organization from '../components/Organization'
+import Organizations from '../components/Organizations'
 import firebase from "firebase/app";
 
 const routes = [
@@ -23,9 +23,9 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
-        path: '/organization',
-        name: 'Organization',
-        component: Organization,
+        path: '/organizations',
+        name: 'Organizations',
+        component: Organizations,
         meta: { requiresAuth: true }
     }
 ];
