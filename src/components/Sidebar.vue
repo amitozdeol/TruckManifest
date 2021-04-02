@@ -5,7 +5,9 @@
                 <header class="category-header">Admin</header>
                 <ul class="menu-list">
                     <li>
-                        <router-link :class="active=='organizations' ? 'is-active' : ''" to="/organizations" @click="active='organizations'">Organizations</router-link>
+                        <router-link :class="active=='Organizations' ? 'is-active' : ''"
+                            to="/organizations"
+                            @click="active='Organizations'">Organizations</router-link>
                     </li>
                 </ul>
             </div>
@@ -23,6 +25,11 @@
                 active: ''
             }
         },
+        watch:{
+            $route (to){
+                this.active = to.name
+            }
+        }
     }
 </script>
 

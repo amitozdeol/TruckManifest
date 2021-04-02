@@ -3,6 +3,7 @@ import Login from '../components/Login'
 import Register from '../components/Register'
 import Home from '../components/Home'
 import Organizations from '../components/Organizations'
+import Organization from '../components/Organization'
 import firebase from "firebase/app";
 
 const routes = [
@@ -26,6 +27,12 @@ const routes = [
         path: '/organizations',
         name: 'Organizations',
         component: Organizations,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/organization/:id',
+        name: 'Organization',
+        component: Organization,
         meta: { requiresAuth: true }
     }
 ];

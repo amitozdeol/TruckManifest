@@ -1,4 +1,5 @@
 <template>
+    <Loader :active="is_loading" />
     <Header title='Home'/>
     <form @submit.prevent="submit" method="post">
         <div class="columns">
@@ -11,8 +12,10 @@
                 </div>
                 <div class="field">
                     <label class="label">Company</label>
-                    <div class="control">
-                        <input class="input" type="text" v-model="company">
+                    <div class="select">
+                        <select v-model="company">
+                            <option v-for="org in orgs" :key="org.key" :value="org.key">{{org.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -46,13 +49,16 @@
 <script>
     import 'firebase/database';
     import Header from './Header';
+    import LoaderMixin from './../mixin/LoaderMixin';
 
     export default {
         components: {
-            Header,
+            Header
         },
+        mixins: [LoaderMixin],
         data() {
             return {
+                orgs: [],
                 license_plate: '',
                 company: '',
                 truck_number: '',
@@ -60,12 +66,23 @@
                 weight: '',
             }
         },
+        async mounted(){
+            const orgs = await this.$firebase.database()
+                        .ref('org')
+                        .once('value');
+            orgs.forEach((d) => {
+                this.orgs.push({key: d.key, ...d.val()});
+            });
+            this.is_loading= false;
+        },
         methods: {
             submit() {
                 const submitBtn = this.$refs.submitBtn;
                 submitBtn.classList.add('is-loading');
 
-                this.$firebase.database().ref('truck').set({
+                const tickets = this.$firebase.database().ref('tickets');
+                var newticket = tickets.push();
+                newticket.set({
                     license_plate: this.license_plate,
                     company: this.company,
                     truck_number: this.truck_number,

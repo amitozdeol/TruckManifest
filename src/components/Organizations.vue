@@ -3,10 +3,10 @@
     <Header title='Organizations' subtitle="Manage all the organizations from this page"/>
     <div class="columns is-flex-wrap-wrap">
         <div v-for="org in orgs" :key="org.key" class="column is-half-tablet is-one-quarter-desktop is-narrow-desktop">
-            <article class="tile is-child box">
-                <p class="title is-4">{{org.name}}</p>
+            <router-link :to="'/organization/'+org.key" class="tile is-child box">
+                <p class="title is-5">{{org.name}}</p>
                 <p class="subtitle">{{org.detail}}</p>
-            </article>
+            </router-link>
         </div>
     </div>
 
