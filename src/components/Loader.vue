@@ -1,5 +1,5 @@
 <template>
-    <div class="pageloader" :class="active ? 'is-active': ''"></div>
+    <div class="pageloader" :class="active ? 'is-active': ''"><span>Loading</span></div>
 </template>
 
 <script>
@@ -36,62 +36,20 @@
         padding-top: 2em;
         background: #00d1b2;
         background: rgba(#00d1b2, $pageloader-opacity);
-
-        // @each $name, $pair in $colors {
-        //     $color: nth($pair, 1);
-        //     $color-invert: nth($pair, 2);
-
-        //     &.is-#{$name} {
-        //         background-color: $color;
-        //         background: rgba($color, $pageloader-opacity);
-
-        //         &::after {
-        //             border-color: $color-invert;
-        //             -webkit-animation: loader-figure-#{$name} 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-        //             -moz-animation: loader-figure-#{$name} 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-        //             animation: loader-figure-#{$name} 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-        //         }
-
-        //         .title {
-        //             color: $color-invert;
-        //         }
-        //     }
-        // }
-
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 5rem;
         z-index: 999998;
         transition: transform .35s ease-out,
         -webkit-transform .35s ease-out;
         will-change: transform;
-
-        &:not(.is-left-to-right),
-        &:not(.is-right-to-left) {
-            -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
-        }
-
-        &.is-left-to-right {
-            -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-        }
-
-        &.is-right-to-left {
-            -webkit-transform: translateX(100%);
-            transform: translateX(100%);
-        }
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
 
         &.is-active {
-
-            &:not(.is-left-to-right),
-            &:not(.is-right-to-left) {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-            }
-
-            &.is-left-to-right,
-            &.is-right-to-left {
-                -webkit-transform: translateX(0);
-                transform: translateX(0);
-            }
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
         }
 
         &::after {
@@ -154,38 +112,4 @@
             }
         }
     }
-
-    // @each $name, $pair in $colors {
-    //     $color: nth($pair, 1);
-    //     $color-invert: nth($pair, 2);
-
-    //     @include keyframes(loader-figure-#{$name}) {
-    //         0% {
-    //             height: 0;
-    //             width: 0;
-    //             background-color: $color-invert;
-    //         }
-
-    //         29% {
-    //             background-color: $color-invert;
-    //         }
-
-    //         30% {
-    //             height: 2em;
-    //             width: 2em;
-    //             background-color: transparent;
-    //             border-width: 1em;
-    //             opacity: 1;
-    //         }
-
-    //         100% {
-    //             height: 2em;
-    //             width: 2em;
-    //             border-width: 0;
-    //             opacity: 0;
-    //             background-color: transparent;
-    //         }
-    //     }
-    // }
-
 </style>
