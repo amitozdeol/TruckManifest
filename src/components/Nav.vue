@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a href="/" class="navbar-item">
                 <strong class="has-text-white">Truck Manifest</strong>

@@ -6,6 +6,7 @@
             <router-link :to="'/organization/'+org.key" class="tile is-child box">
                 <p class="title is-5">{{org.name}}</p>
                 <p class="subtitle">{{org.detail}}</p>
+                <p class="subtitle">{{org.tickets}}</p>
             </router-link>
         </div>
     </div>
@@ -34,16 +35,15 @@
 <script>
     import 'firebase/database';
     import Header from './Header';
-    import Loader from './Loader';
+    import LoaderMixin from './../mixin/LoaderMixin';
 
     export default {
         components: {
-            Header,
-            Loader
+            Header
         },
+        mixins: [LoaderMixin],
         data() {
             return {
-                is_loading: true,
                 orgs: [],
                 name: '',
                 detail: ''

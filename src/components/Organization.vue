@@ -7,7 +7,16 @@
             <li class="is-active"><router-link :to="'/organization/'+org.key">{{org.name}}</router-link></li>
         </ul>
     </nav>
-
+    <div class="columns is-flex-wrap-wrap">
+        <div v-for="ticket in org.tickets" :key="ticket" class="column is-half-tablet is-one-quarter-desktop is-narrow-desktop">
+            <router-link :to="'/organization/'+org.key" class="tile is-child box">
+                <p>{{ticket.license_plate}}</p>
+                <p>{{ticket.truck_number}}</p>
+                <p>{{ticket.weight}}</p>
+                <p>{{ticket.truck_content}}</p>
+            </router-link>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -27,12 +36,25 @@
                 detail: ''
             }
         },
-        mounted(){
-            var orgs = this.$firebase.database().ref(`org/${this.$route.params.id}`);
-            orgs.on('value', (data) => {
+        async mounted(){
+            var orgs = await this.$firebase.database().ref(`org/${this.$route.params.id}`);
+            orgs.once('value', (data) => {
                 this.org = data.val();
                 this.is_loading= false;
             });
+
+            // var tickets = await this.$firebase.database().ref("tickets");
+            // let t = tickets.orderByChild("company").equalTo(this.$route.params.id);
+            // t.once('value', (data) => {
+            //     // this.org = data.val();
+            //     // this.is_loading= false;
+            //     // console.log(this.$route.params.id, data.val());
+            //     data.forEach(d => {
+            //         this.tickets.push({key: d.key, ...d.val()});
+            //     });
+
+            // });
+            // this.is_loading= false;
         },
     }
 </script>

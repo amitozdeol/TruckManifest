@@ -80,7 +80,7 @@
                 const submitBtn = this.$refs.submitBtn;
                 submitBtn.classList.add('is-loading');
 
-                const tickets = this.$firebase.database().ref('tickets');
+                const tickets = this.$firebase.database().ref(`org/${this.company}/tickets`);
                 var newticket = tickets.push();
                 newticket.set({
                     license_plate: this.license_plate,
