@@ -1,11 +1,12 @@
 <template>
     <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a href="/" class="navbar-item">
-                <strong class="has-text-white">Truck Manifest</strong>
+            <a href="/" class="navbar-item logo">
+                <img src="favicon/favicon-32x32.png" >  &nbsp;
+                <strong class="has-text-white logo-text">Truck Manifest</strong>
             </a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="toggleNav = !toggleNav">
+            <a role="button" class="navbar-burger" :class="{'is-active': toggleNav}" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="toggleNav = !toggleNav">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>

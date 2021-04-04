@@ -6,7 +6,6 @@
             <router-link :to="'/organization/'+org.key" class="tile is-child box">
                 <p class="title is-5">{{org.name}}</p>
                 <p class="subtitle">{{org.detail}}</p>
-                <p class="subtitle">{{org.tickets}}</p>
             </router-link>
         </div>
     </div>
@@ -49,12 +48,12 @@
                 detail: ''
             }
         },
-        mounted(){
-            var orgs = this.$firebase.database().ref('org');
+        async mounted(){
+            var orgs = await this.$firebase.database().ref('org');
             orgs.on('child_added', (data) => {
                 this.orgs.push({key: data.key, ...data.val()});
-                this.is_loading= false;
             });
+            this.is_loading= false;
         },
         methods: {
             submit() {

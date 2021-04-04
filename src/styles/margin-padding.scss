@@ -1,0 +1,44 @@
+// Margin and Padding
+// All the margin and padding classes based on the breakpoint for the bulma framework
+$grid-breakpoints: (
+  xs: 500px,
+  sm: $tablet,
+  md: $desktop,
+  lg: $widescreen,
+  xl: $fullhd
+) !default;
+
+$sizes: (
+    (1, 0.25rem),
+    (2, 0.5rem),
+    (3, 0.75rem),
+    (4, 1rem),
+    (5, 1.5rem),
+    (6, 3rem),
+);
+
+@each $breakpoint_name, $breakpoint in $grid-breakpoints {
+    @media (min-width: $breakpoint) {
+        @each $prop, $abbrev in (margin: m, padding: p) {
+            @each $size, $length in $sizes {
+                .#{$abbrev}-#{$breakpoint_name}-#{$size} { #{$prop}: $length !important; }
+                .#{$abbrev}t-#{$breakpoint_name}-#{$size},
+                .#{$abbrev}y-#{$breakpoint_name}-#{$size} {
+                    #{$prop}-top: $length !important;
+                }
+                .#{$abbrev}r-#{$breakpoint_name}-#{$size},
+                .#{$abbrev}x-#{$breakpoint_name}-#{$size} {
+                    #{$prop}-right: $length !important;
+                }
+                .#{$abbrev}b-#{$breakpoint_name}-#{$size},
+                .#{$abbrev}y-#{$breakpoint_name}-#{$size} {
+                    #{$prop}-bottom: $length !important;
+                }
+                .#{$abbrev}l-#{$breakpoint_name}-#{$size},
+                .#{$abbrev}x-#{$breakpoint_name}-#{$size} {
+                    #{$prop}-left: $length !important;
+                }
+            }
+        }
+    }
+}

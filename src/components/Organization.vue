@@ -42,19 +42,6 @@
                 this.org = data.val();
                 this.is_loading= false;
             });
-
-            // var tickets = await this.$firebase.database().ref("tickets");
-            // let t = tickets.orderByChild("company").equalTo(this.$route.params.id);
-            // t.once('value', (data) => {
-            //     // this.org = data.val();
-            //     // this.is_loading= false;
-            //     // console.log(this.$route.params.id, data.val());
-            //     data.forEach(d => {
-            //         this.tickets.push({key: d.key, ...d.val()});
-            //     });
-
-            // });
-            // this.is_loading= false;
         },
     }
 </script>

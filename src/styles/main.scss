@@ -1,82 +1,23 @@
-$font-color: #ffffff;
-$font-dark-color: #949ba2;
-$font-darker-color: #5b646d;
-$highlight-color: #ffa500;
-$main-color: #2e323b;
-$label-color: $font-color;
-$menu-item-active-color: #fff !important;
+@use './variable.scss' as v;
 
-$light-color: lighten($main-color, 3%);
-$dark-color: darken($main-color, 3%);
-$lighter-color: lighten($main-color, 6%);
-$darker-color: darken($main-color, 6%);
-
-$gradient-color-start: $light-color;
-$gradient-color-end: $dark-color;
-
-$sidebar-width: 13rem;
-$header-height: 2.25rem;
-$padding: 2rem;
-
-@import './../../node_modules/bulma/bulma.sass';
-
-// Margin and Padding
-// All the margin and padding classes based on the breakpoint for the bulma framework
-$grid-breakpoints: (
-  xs: 500px,
-  sm: $tablet,
-  md: $desktop,
-  lg: $widescreen,
-  xl: $fullhd
-) !default;
-
-$sizes: (
-    (1, 0.25rem),
-    (2, 0.5rem),
-    (3, 0.75rem),
-    (4, 1rem),
-    (5, 1.5rem),
-    (6, 3rem),
-);
-
-@each $breakpoint_name, $breakpoint in $grid-breakpoints {
-    @media (max-width: $breakpoint) {
-        @each $prop, $abbrev in (margin: m, padding: p) {
-            @each $size, $length in $sizes {
-                .#{$abbrev}-#{$breakpoint_name}-#{$size} { #{$prop}: $length !important; }
-                .#{$abbrev}t-#{$breakpoint_name}-#{$size},
-                .#{$abbrev}y-#{$breakpoint_name}-#{$size} {
-                    #{$prop}-top: $length !important;
-                }
-                .#{$abbrev}r-#{$breakpoint_name}-#{$size},
-                .#{$abbrev}x-#{$breakpoint_name}-#{$size} {
-                    #{$prop}-right: $length !important;
-                }
-                .#{$abbrev}b-#{$breakpoint_name}-#{$size},
-                .#{$abbrev}y-#{$breakpoint_name}-#{$size} {
-                    #{$prop}-bottom: $length !important;
-                }
-                .#{$abbrev}l-#{$breakpoint_name}-#{$size},
-                .#{$abbrev}x-#{$breakpoint_name}-#{$size} {
-                    #{$prop}-left: $length !important;
-                }
-            }
-        }
-    }
+:root{
+    --sidebar-width: 12rem;
 }
 
+// This contains any custom css besides bulma
 html {
     overflow-y: auto;
 }
 
 body {
-    color: $font-color;
+    color: v.$font-color;
 }
 
 .sidebar {
-    padding-left: calc(#{$padding} - 0.75rem);
-    padding-right: calc(#{$padding} - 0.75rem);
+    // padding-left: calc(#{v.$padding} - 0.75rem);
+    // padding-right: calc(#{v.$padding} - 0.75rem);
     position: absolute;
+    margin-top: 1.25rem;
 
     .category-header {
         padding: 0.5em 0.75em;
@@ -84,21 +25,24 @@ body {
 
     .menu {
         position: fixed;
-        width: calc(#{$sidebar-width} - 2.5rem);
+        width: var(--sidebar-width);
         max-width: inherit;
     }
 
     .menu-list a {
         font-size: 0.875rem;
         line-height: 24px;
-        color: $font-dark-color;
+        color: v.$font-dark-color;
+    }
+    .sidebar-toggle{
+        width: var(--sidebar-width);
     }
 }
 
 .sidebar:before {
     content: "";
-    background-color: $dark-color;
-    width: $sidebar-width;
+    background-color: v.$darker-color;
+    width: var(--sidebar-width);
     position: fixed;
 }
 
@@ -110,10 +54,11 @@ body {
 }
 
 .main {
-    margin-left: $sidebar-width;
+    margin-left: var(--sidebar-width);
     position: relative;
-    padding-left: $padding;
-    padding-right: $padding;
+    padding-left: v.$padding;
+    padding-right: v.$padding;
+    margin-top: v.$header-height;
 
     header {
         line-height: 18px;
@@ -126,11 +71,11 @@ body {
 
         hr {
             background-color: transparent;
-            border-top: 1px solid $lighter-color;
+            border-top: 1px solid v.$lighter-color;
         }
 
         small {
-            color: $font-dark-color;
+            color: v.$font-dark-color;
             text-align: right;
         }
     }
@@ -144,32 +89,32 @@ body {
     z-index: -2;
     left: 0;
     right: 0;
-    background-color: $dark-color;
+    background-color: v.$dark-color;
 }
 
 .sidebar,
 .main {
-    margin-top: $header-height;
-    padding-top: $padding;
+    padding-top: v.$padding;
 }
 
 .navbar {
-    box-shadow: 0px 0px 21px $darker-color;
+    box-shadow: 0px 0px 21px v.$darker-color;
 }
 
-.navbar-brand {
-    width: $sidebar-width;
-    background-color: $highlight-color;
-    margin-right: calc(#{$padding} - 0.75rem);
+.navbar.is-compressed > * > * > .logo-text{
+    display: none;
+}
 
-    .navbar-item {
-        padding-left: $padding;
-    }
+.logo {
+    width: calc(var(--sidebar-width) + 2rem);
+    background-color: v.$highlight-color;
+    margin-right: calc(#{v.$padding} - 0.75rem);
+    padding-left: v.$padding;
 }
 
 .box {
     hr {
-        background-color: $lighter-color;
+        background-color: v.$lighter-color;
     }
 }
 
@@ -178,10 +123,10 @@ body {
 }
 
 .box.accent {
-    background-color: $highlight-color;
+    background-color: v.$highlight-color;
 
     .subtitle {
-        color: $font-color;
+        color: v.$font-color;
     }
 }
 
@@ -199,7 +144,7 @@ body {
         font-size: 85%;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: $font-dark-color;
+        color: v.$font-dark-color;
     }
 
     .delta-indicator {
@@ -226,7 +171,7 @@ body {
 /* overwrite bulma, try to resolve with variables */
 
 .box {
-    background-color: $lighter-color;
+    background-color: v.$lighter-color;
     box-shadow: none;
     border-radius: 3px;
 }
@@ -239,16 +184,16 @@ body {
 .content h6,
 .title,
 .tile {
-    color: $font-color;
+    color: v.$font-color;
 }
 
 .subtitle {
-    color: $font-dark-color;
+    color: v.$font-dark-color;
 }
 
 .navbar-item.is-tab:hover {
     background-color: transparent;
-    border-bottom-color: $font-dark-color;
+    border-bottom-color: v.$font-dark-color;
 }
 
 .navbar-item.is-tab {
@@ -258,43 +203,43 @@ body {
 }
 
 a.navbar-item:hover {
-    color: $darker-color;
+    color: v.$darker-color;
 }
 
 .breadcrumb li+li::before,
 .breadcrumb li a {
-    color: $font-darker-color;
+    color: v.$font-darker-color;
 }
 
 .breadcrumb li a:hover,
 .breadcrumb li.is-active a {
-    color: $font-color;
+    color: v.$font-color;
 }
 
 .tabs ul {
-    border-bottom-color: $font-darker-color;
+    border-bottom-color: v.$font-darker-color;
 }
 
 .tabs li.is-active a {
-    border-bottom-color: $font-color;
-    color: $font-color;
+    border-bottom-color: v.$font-color;
+    color: v.$font-color;
 }
 
 .tabs a {
-    border-bottom-color: $font-darker-color;
-    color: $font-dark-color;
+    border-bottom-color: v.$font-darker-color;
+    color: v.$font-dark-color;
 }
 
 .tabs a:hover {
-    border-bottom-color: $font-color;
-    color: $font-color;
+    border-bottom-color: v.$font-color;
+    color: v.$font-color;
 }
 
 .pagination-link,
 .pagination-next,
 .pagination-previous {
-    border-color: $font-dark-color;
-    color: $font-dark-color;
+    border-color: v.$font-dark-color;
+    color: v.$font-dark-color;
 }
 
 .pagination-link.is-current,
@@ -302,6 +247,6 @@ a.navbar-item:hover {
 .pagination-next:hover,
 .pagination-previous:hover {
     background-color: transparent;
-    border-color: $font-color;
-    color: $font-color;
+    border-color: v.$font-color;
+    color: v.$font-color;
 }
