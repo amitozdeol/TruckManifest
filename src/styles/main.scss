@@ -14,9 +14,8 @@ body {
 }
 
 .sidebar {
-    // padding-left: calc(#{v.$padding} - 0.75rem);
-    // padding-right: calc(#{v.$padding} - 0.75rem);
     position: absolute;
+    padding-top: 2.2rem;
     margin-top: 1.25rem;
 
     .category-header {
@@ -92,7 +91,6 @@ body {
     background-color: v.$dark-color;
 }
 
-.sidebar,
 .main {
     padding-top: v.$padding;
 }

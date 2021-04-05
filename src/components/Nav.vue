@@ -20,7 +20,7 @@
 
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <small v-if="user" class="tag is-link is-light mb-md-2">{{user.displayName}}</small>
+                    <small v-if="user" class="tag is-link is-light mb-xs-2 mb-md-0">{{user.displayName}}</small>
                     <div v-if="user" class="buttons">
                         <button class="button is-light" @click="logout">Logout</button>
                     </div>

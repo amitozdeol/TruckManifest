@@ -1,14 +1,15 @@
 // Margin and Padding
 // All the margin and padding classes based on the breakpoint for the bulma framework
 $grid-breakpoints: (
-  xs: 500px,
-  sm: $tablet,
+  xs: 0px,
+  sm: 500px,
   md: $desktop,
   lg: $widescreen,
   xl: $fullhd
 ) !default;
 
 $sizes: (
+    (0, 0),
     (1, 0.25rem),
     (2, 0.5rem),
     (3, 0.75rem),

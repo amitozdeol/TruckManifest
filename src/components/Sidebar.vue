@@ -5,8 +5,8 @@
                 <ul class="menu-list">
                     <li>
                         <a class="is-flex is-align-items-center" :class="{ 'is-justify-content-center' : is_compressed}" @click="updateSidebar()">
-                            <font-awesome-icon  v-if="is_compressed" :icon="['fas', 'chevron-right']" size="2x" class="mr-0 mr-xs-2"/>
-                            <font-awesome-icon v-else :icon="['fas', 'chevron-left']" size="2x" class="mr-0 mr-xs-2"/>
+                            <font-awesome-icon  v-if="is_compressed" :icon="['fas', 'chevron-right']" size="2x" class="mr-xs-0 mr-sm-2"/>
+                            <font-awesome-icon v-else :icon="['fas', 'chevron-left']" size="2x" class="mr-xs-0 mr-sm-2"/>
                             <span class="sidebar-text">Collapse</span>
                         </a>
                     </li>
@@ -17,7 +17,7 @@
                         <router-link class="is-flex is-align-items-center" :class="{ 'is-active' : (active=='Organizations'), 'is-justify-content-center' : is_compressed}"
                             to="/organizations"
                             @click="active='Organizations'">
-                            <font-awesome-icon :icon="['fas', 'globe']" size="2x" class="mr-0 mr-xs-2"/>
+                            <font-awesome-icon :icon="['fas', 'globe']" size="2x" class="mr-xs-0 mr-sm-2"/>
                             <span class="sidebar-text">Organizations</span>
                         </router-link>
                     </li>
