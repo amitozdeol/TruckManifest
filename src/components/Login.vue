@@ -38,9 +38,8 @@
                 const submitBtn = this.$refs.submitBtn;
                 submitBtn.classList.add('is-loading');
                 this.$firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-                    .then(data => {
+                    .then(() => {
                         submitBtn.classList.remove('is-loading');
-                        console.log(data);
                         this.$router.replace({ name: "Home" });
                     })
                     .catch(err => {

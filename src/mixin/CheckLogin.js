@@ -2,6 +2,7 @@ var mixin = {
     data(){
         return {
             user: null,
+            is_ready: false
         }
     },
     watch:{
@@ -10,8 +11,11 @@ var mixin = {
             this.user = await this.getCurrentUser();
         }
     },
-    async mounted(){
+    async beforeMount(){
         this.user = await this.getCurrentUser();
+        this.$nextTick(() => {
+            this.is_ready = true;
+        });
     },
     methods: {
         /**

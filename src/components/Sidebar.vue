@@ -2,18 +2,22 @@
     <aside class="sidebar">
         <nav v-if="user" class="menu">
             <div class="menu-category">
-                <div class="sidebar-toggle is-flex is-justify-content-end pr-2 pt-2">
-                    <ion-icon v-if="is_compressed" name="chevron-forward-outline" @click="updateSidebar(12)"></ion-icon>
-                    <ion-icon v-else name="chevron-back-outline" @click="updateSidebar(4)"></ion-icon>
-                </div>
-
+                <ul class="menu-list">
+                    <li>
+                        <a class="is-flex is-align-items-center" :class="{ 'is-justify-content-center' : is_compressed}" @click="updateSidebar()">
+                            <font-awesome-icon  v-if="is_compressed" :icon="['fas', 'chevron-right']" size="2x" class="mr-0 mr-xs-2"/>
+                            <font-awesome-icon v-else :icon="['fas', 'chevron-left']" size="2x" class="mr-0 mr-xs-2"/>
+                            <span class="sidebar-text">Collapse</span>
+                        </a>
+                    </li>
+                </ul>
                 <header class="sidebar-header category-header">Admin</header>
                 <ul class="menu-list">
                     <li>
                         <router-link class="is-flex is-align-items-center" :class="{ 'is-active' : (active=='Organizations'), 'is-justify-content-center' : is_compressed}"
                             to="/organizations"
                             @click="active='Organizations'">
-                            <ion-icon name="earth-outline" class="mr-0 mr-xs-2"></ion-icon>
+                            <font-awesome-icon :icon="['fas', 'globe']" size="2x" class="mr-0 mr-xs-2"/>
                             <span class="sidebar-text">Organizations</span>
                         </router-link>
                     </li>
@@ -37,28 +41,35 @@
         watch:{
             $route (to){
                 this.active = to.name
+            },
+            is_ready(){
+                this.updateSidebar();
             }
         },
-        created(){
+        mounted(){
             window.addEventListener("resize", this.init);
-            this.init();
         },
         methods:{
+            /**
+             * Check for any resize even and change the sidebar accordingly
+             */
             init(){
                 if (window.innerWidth < 500) {
-                    if(!this.is_compressed) this.updateSidebar(4); //compress
+                    if(!this.is_compressed) this.updateSidebar(); //compress
                 }else{
-                    if(this.is_compressed) this.updateSidebar(12); //expand
+                    if(this.is_compressed) this.updateSidebar(); //expand
                 }
             },
 
             /**
              * Compress or expand sidebar when click on icon on the sidebar
              */
-            updateSidebar(e){
-                console.log(window.innerWidth);
-                document.documentElement.style.setProperty('--sidebar-width', e+'rem');
+            updateSidebar(){
                 this.is_compressed = !this.is_compressed;
+
+                const width = this.is_compressed ? 4 : 12;
+                document.documentElement.style.setProperty('--sidebar-width', width+'rem');
+
                 const navbar = document.getElementsByClassName('navbar')[0];
                 if (this.is_compressed) {
                     navbar.classList.add('is-compressed');
